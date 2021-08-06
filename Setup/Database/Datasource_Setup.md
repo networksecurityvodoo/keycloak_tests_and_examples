@@ -10,20 +10,20 @@ Prerequisites:
 1. Under the Entry 'Configuration ' 
    navigate to the KeyCloakDS Datasource and click on "View".
 
-<img src="A_DS.png" alt="" width="50%"/>
+<!-- <img src="A_DS.png" alt="" width="50%"/> -->
+ ![Deployment Step1](./images/A_DS.png)
 
 
 2. In the new dialogue click on "Edit" and ensure to change the Configuration, according to the Screenshots. 
 
-
-<img src="B_DS.png" alt="" width="50%"/>
-
-
-<img src="C_DS.png" alt="" width="50%"/>
+ ![Deployment Step2](./images/B_DS.png)
 
 
-<img src="E_DS.png" alt="" width="50%"/>
+ ![Deployment Step3](./images/C_DS.png)
 
+
+ ![Deployment Step4](./images/E_DS.png)
+ 
 ---
 Below you find the Field-Values from the Screenshots:
 
