@@ -12,18 +12,20 @@ In our case this is MariaDB (https://downloads.mariadb.org/connector-java/).
 1. Under the Entry 'Deployments' 
    click on the "+" and select "Upload Deployment".
 
-<img src="A_Upload_Driver.png" alt="" width="50%"/>
+<!-- <img src="A_Upload_Driver.png" alt="" width="50%"/> --> 
+
+ ![Deployment Step1](./images/A_Upload_Driver.png)
 
 2. In the new dialogue choose the JAR-File, which you downloaded before. 
 
-<img src="00-WildFly-Deploy.png" alt="" width="50%"/>
+ ![Deployment Step2](./images/00-WildFly-Deploy.png)
 
 3. Choose a name for the Deployment (will be referenced in the Datasource) and set it to enabled.
 
-<img src="01-WildFly-Deploy.png" alt="" width="50%"/>
+ ![Deployment Step3](./images/01-WildFly-Deploy.png)
 
 4. Reboot the Server and check the Deployments-Tab, it should look like below.
 
-<img src="02-WildFly-Deploy.png" alt="" width="50%"/>
+ ![Deployment Step4](./images/02-WildFly-Deploy.png)
 
 
