@@ -80,4 +80,4 @@ The output should show that the service is active and running:
 ## TODO bei getrenntem DB-Server
 
 
-Firewall Regel anlegen: firewall-cmd --zone=public --add-service=mysql --permanent-->
+Firewall Regel anlegen: firewall-cmd --zone=public --add-service=mysql --permanent
