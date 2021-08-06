@@ -1,4 +1,4 @@
-## Installation von Maria-DB und Konfiguration
+##  Maria-DB installation and configuration
  - Written for CentOS
  
 - Install the MariaDB package with the yum package manager (root permissions needed):
@@ -20,7 +20,7 @@ The Skript will:
 - Run mysql_secure_installation and set a new root Password (specified in the Skript)
 
 
-Inhalt der setup_mysql.sh:
+Content of setup_mysql.sh:
 
 MYSQL_DBPASS=mysql
 cat >/etc/my.cnf.d/openstack.cnf<<EOF
@@ -53,17 +53,21 @@ sudo systemctl status mariadb
 
 The output should show that the service is active and running:
 
-<---                                         
- 4.2 Anlage einer Datenbank und eines Datenbankbenutzers für KeyCloak
-/usr/bin/mysql -u root -p 123456
+                                       
+## Creating a database and a database user for KeyCloak
+/usr/bin/mysql -u root -p YOUR_PASSWORD
 
+                                        
+```sh
 > CREATE DATABASE `db` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 > CREATE USER 'keycloak_srv'@'localhost' IDENTIFIED BY '3jV6&cnf';
 > GRANT USAGE ON *.* TO 'keycloak_srv'@'%' IDENTIFIED BY '3jV6&cnf';
 > GRANT ALL PRIVILEGES ON keycloak.* TO keycloak_srv@'%';
 > FLUSH PRIVILEGES;
 > SHOW GRANTS FOR 'keycloak_srv'@'%';
-
+```
+ 
+```sh
 > +------------------------------------------------------------------------------------+
 > | Grants for keycloak_srv@localhost |
 > +------------------------------------------------------------------------------------+
@@ -71,9 +75,9 @@ The output should show that the service is active and running:
 > IDENTIFIED BY PASSWORD '*EACB1316E9F7C441C1B92BA2D0EF09BECACBA151' |
 > | GRANT ALL PRIVILEGES ON `keycloak`.* TO 'keycloak_srv'@'%'|
 > +------------------------------------------------------------------------------------+
+```
 
-
-TODO bei getrenntem DB-Server
+## TODO bei getrenntem DB-Server
 
 
 Firewall Regel anlegen: firewall-cmd --zone=public --add-service=mysql --permanent-->
