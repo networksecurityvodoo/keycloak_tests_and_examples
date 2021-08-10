@@ -21,31 +21,7 @@ The Skript will:
 
 
 Content of setup_mysql.sh:
-
-MYSQL_DBPASS=mysql
-cat >/etc/my.cnf.d/openstack.cnf<<EOF
-[mysqld]
-bind-address = IP_HIER_ÄNDERN !!
-
-default-storage-engine = innodb
-innodb_file_per_table
-max_connections = 4096
-collation-server = utf8_general_ci
-character-set-server = utf8
-EOF
-systemctl enable mariadb.service
-systemctl start mariadb.service
-
-/usr/bin/mysql_secure_installation <<EOF
-
-y
-$MYSQL_DBPASS
-$MYSQL_DBPASS
-y
-y
-y
-y
-EOF
+https://raw.githubusercontent.com/networksecurityvodoo/keycloak_example_configs/main/Setup/Database/scripts/setup_mysql.sh
                                         
 To verify that the installation and configuration was successful, check the MariaDB service status by typing:
 
