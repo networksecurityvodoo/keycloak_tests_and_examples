@@ -1,6 +1,6 @@
 ## keycloak_example_configs
 
-- This repository contains configurations for Keycloak. 
+- This repository contains configuration examples and skripts for administering and setting up Keycloak. 
 
 
 
