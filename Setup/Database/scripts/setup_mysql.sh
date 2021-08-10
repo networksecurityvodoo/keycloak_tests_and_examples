@@ -1,4 +1,4 @@
-MYSQL_DBPASS= CHANGEME!
+MYSQL_DBPASS=CHANGEME!
 
 cat >/etc/my.cnf.d/mariadb.cnf<<EOF
 [mysqld]
