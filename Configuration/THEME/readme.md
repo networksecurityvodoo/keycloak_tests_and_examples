@@ -1,7 +1,20 @@
 ## Create a .jar File from a Theme and Deploy it
 
 # 1. Prerequisited (Windows)
-Create 
+
+- Install the JDK from here and download Maven from here.
+-  Updatew the Environmentvariables in Windows
+* For Maven open cmd.exe with administrative rights and type:
+      
+   ```batch
+   set PATH="c:\program files\apache-maven-3.x.y\bin";%PATH%
+   ```
+
+* For JAVA :
+      
+   ```batch
+   set PATH="c:\program files\apache-maven-3.x.y\bin";%PATH%
+   ```
 
 
 4. And another item.
