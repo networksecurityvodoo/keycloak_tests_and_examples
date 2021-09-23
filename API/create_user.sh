@@ -2,7 +2,6 @@
 
 #############################
 # Add User via Keycloak CLI #
-# @Author: networksecurityvodoo    #
 # Date: 2021-09-23          #
 #############################
 # requires https://stedolan.github.io/jq/download/ for JSON-Parsing
