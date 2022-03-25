@@ -1,4 +1,4 @@
-## keycloak_example_configs
+## keycloak_xample_configs
 
 - This repository contains configuration examples and skripts for administering and setting up Keycloak. 
 
@@ -14,7 +14,7 @@
 
 
 
-2021 @networksecurityvodoo
+2021 - 2022 @networksecurityvodoo
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
