@@ -19,7 +19,7 @@ import requests,json
 
 url = "http://localhost:8000/auth/realms/Test_Realm/protocol/openid-connect/token"
 
-payload='username=python&password=123456&client_id=pytest&client_secret=766716a8-b531-4d6a-a379-1dc4ff37517f&grant_type=password'
+payload='username=USERNAME&password=PASSWORD&client_id=pytest&client_secret=766716a8-b531-4d6a-a379-1dc4ff37517f&grant_type=password'
 headers = {
   'Content-Type': 'application/x-www-form-urlencoded'
 }
@@ -93,7 +93,6 @@ for x in json_arr:
 # ------------------------------------------------------------------------------------
 # write all attributes via PUT 
 # ------------------------------------------------------------------------------------
-#json.dumps
      payload3 = {
      "attributes": NewAttributes
      }
