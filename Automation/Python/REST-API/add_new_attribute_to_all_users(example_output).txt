@@ -1,0 +1,35 @@
+=======================================================================================
+> This File contains the CLI Output of the skript: add_new_attribute_to_all_users.py <
+=======================================================================================
+
+
+Number of Users to be edited:3
+-------------------------------------
+--Debug: User-URL--
+http://localhost:8000/auth/admin/realms/Test_Realm/users/b445ccd6-6993-44df-8446-e20f4b598bc3
+--Debug: Attribute Values--
+{"abc":  "123" },{"i18n":"en-GB"}
+--Debug: Payload Content--
+{'attributes': '{"abc":  "123" },{"i18n":"en-GB"}'}
+----------------
+Adding attribute to User: agathe ...
+HTTP Code:400
+--Debug: User-URL--
+http://localhost:8000/auth/admin/realms/Test_Realm/users/4808bccc-3072-46bf-a2a2-b8a6e3488673
+--Debug: Attribute Values--
+{"abc":  "123" },{"i18n":"en-GB"}
+--Debug: Payload Content--
+{'attributes': '{"abc":  "123" },{"i18n":"en-GB"}'}
+----------------
+Adding attribute to User: ali ...
+HTTP Code:400
+--Debug: User-URL--
+http://localhost:8000/auth/admin/realms/Test_Realm/users/edffd63e-f6a3-4c01-86b4-068cef0e0e22
+--Debug: Attribute Values--
+{"abc":  "123" },{"i18n":"en-GB"}
+--Debug: Payload Content--
+{'attributes': '{"abc":  "123" },{"i18n":"en-GB"}'}
+----------------
+Adding attribute to User: python ...
+HTTP Code:400
+Number of changed Users:3
