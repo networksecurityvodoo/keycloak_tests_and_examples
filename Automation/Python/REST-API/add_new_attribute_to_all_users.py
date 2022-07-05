@@ -6,7 +6,7 @@ import requests,json
 #  Adds a new attribute [i18n] and pushes all attributes via API            #
 #  into the database.                                                       #
 #  @Author networksecurityvodoo                                             #
-#  @ Version: 1.1 - 05.07.2022                                              #
+#  @Version: 2.0 - 05.07.2022                                               #
 #############################################################################
 # ------------------------------------------------------------------------------------
 ## Get Token 
@@ -49,10 +49,10 @@ json_arr = users.json()
 # -- /Debug -- 
 
 print("------------------------------------------------------------------------")
-print ("Number of users in the realm about to be changed: "+str(len(json_arr))) 
+print ("Number of Users in the realm about to be changed: "+str(len(json_arr))) 
 print("------------------------------------------------------------------------")
 
-counter = 0 # counting number of changed users(number of iterations through the dictionary)
+counter = 0 # counting the number of changed Users(number of iterations through dictionary)
 
 # ------------------------------------------------------------------------------------
 ## for each unique entry in the dictionary...
@@ -70,11 +70,16 @@ for x in json_arr:
 ## Get existing attributes for each user & add new one  
 # ------------------------------------------------------------------------------------
     #print (x) # All Values in the dictionary
-     # print(x['attributes'])
-     x['attributes']['i18n'] = ['en-GB']
-     NewAttributes = x['attributes']
-     NewAttributes['i18n'] = ['en-GB']           # add attribute "i18n"
+    # print(x['attributes'])
     
+     if 'attributes' in x:                        # if dict 'attributes' exists
+      x['attributes']['i18n'] = ['en-GB']
+      NewAttributes = x['attributes']             # use dict 'attributes'
+      NewAttributes['i18n'] = ['en-GB']           # add value "i18n" to the dict
+     else:
+      x['attributes'] = {}                        # create dict 'attributes'
+      NewAttributes = x['attributes']             # add value to the dict
+      NewAttributes['i18n'] = ['en-GB']
      # -- Debug -- 
     # print ("--Debug: Attribute Values--")
     # print (NewAttributes)
@@ -98,14 +103,15 @@ for x in json_arr:
      }
 
      response3 = requests.request("PUT", url3, headers=headers3, data=payload3, verify=False) # write via PUT !
-     responsecode = response3.status_code
+     response3_HTTP_REASON = response3.reason
+     response3_HTTP_CODE = response3.status_code
 
      ## log feedback into console ...
      print("    ")
      print("Adding attribute to User:"+" "+x['username']+" ...")
      print("Attributes retrieved: "+str(x['attributes']))
      print("Attributes changed:   "+ str(NewAttributes))
-     print("Response HTTP Code:   "+ str(responsecode))
+     print("Response HTTP Code:   " +str(response3_HTTP_CODE)+" "+str(response3_HTTP_REASON))
      counter = counter + 1
 print("------------------------------------------------------------------------")
 print ("Number of changed Users:" + str(counter))
