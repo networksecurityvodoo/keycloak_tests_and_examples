@@ -28,4 +28,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-https://img.shields.io/github/stars/networksecurityvodoo/keycloak_tests_and_examples?style=social
+
+![]([https://img.shields.io/badge/Microsoft%20Azure-User-blue](https://img.shields.io/github/stars/networksecurityvodoo/keycloak_tests_and_examples?style=social))
+
+
