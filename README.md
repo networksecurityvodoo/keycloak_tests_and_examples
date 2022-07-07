@@ -4,7 +4,7 @@ This repository contains configuration examples and skripts for the awesome soft
 Contents:
 * Keycloak Administration and Setup Guides
 * Keycloak Themes
-* Keycloak Automation Skripts in Python and Shell-Script
+* Keycloak automation scripts in Python and Shell-Script
 
 Supported Keycloak Versions: 11.0.0 and above
 
