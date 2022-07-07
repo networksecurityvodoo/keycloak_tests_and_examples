@@ -1,20 +1,14 @@
-## keycloak_xample_configs
+## keycloak_tests_and_examples
 
-- This repository contains configuration examples and skripts for administering and setting up Keycloak. 
+This repository contains configuration examples and skripts for the awesome software keycloak.
+Contents:
+* Keycloak Administration and Setup Guides
+* Keycloak Themes
+* Keycloak Automation Skripts in Python and Shell-Script
 
+Supported Keycloak Versions: 11.0.0 and above
 
-
-
-
-
-
-
-
-
-
-
-
-2021 - 2022 @networksecurityvodoo
+Content in this Repository is licensed under:
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,6 +23,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
+Repository Meta Information:
 ![](https://img.shields.io/github/stars/networksecurityvodoo/keycloak_tests_and_examples?style=social)
-
+ | Startdate: 07.2021
+| Last Update: 07.2022
+| Maintained by: 
+ @networksecurityvodoo
 
