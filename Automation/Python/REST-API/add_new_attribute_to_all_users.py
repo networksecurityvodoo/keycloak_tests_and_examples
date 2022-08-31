@@ -1,4 +1,4 @@
-from operator import index, length_hint
+from operator import eq, index, length_hint
 import requests,json
 from urllib3.exceptions import InsecureRequestWarning # for suppressing Warning: "InsecureRequestWarning: Unverified HTTPS request is being made to host 'YOUR_HOSTNAME'
 
@@ -15,20 +15,21 @@ requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 #  into the database.                                                       #
 #                                                                           #
 #  @Author networksecurityvodoo                                             #
-#  @Version: 2.0 - 30.08.2022                                               #
+#  @Version: 2.1 - 31.08.2022                                               #
 #############################################################################
 
-target_host = "http://127.0.0.1:8000"
-login_string = 'username=YOUR_USERNAME&password=YOUR_SECRET&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&grant_type=password'
+target_host = "https://192.168.94.33:8443"
+login_string = 'username=esbadmin&password=esbadmin&client_id=frontend&client_secret=a73bd556-9449-46b3-8e05-705444a8f39c&grant_type=password'
 
-#Pagination Settings
 start_value_pagination = 0
-limit = 2
+limit = 100
+
+
 
 def get_accesstoken():
     """Retreive Accesstoken from target_host/auth/realms/{realm}/protocol/openid-connect/token"""
 
-    url = "http://127.0.0.1:8000/auth/realms/trafineo/protocol/openid-connect/token"
+    url = "https://192.168.94.33:8443/auth/realms/trafineo/protocol/openid-connect/token"
     payload=login_string
 
     headers = {
@@ -36,6 +37,7 @@ def get_accesstoken():
     }
     response = requests.request("POST", url, headers=headers, data=payload, verify=False)
    # print(response.text)
+    #global token_data  #should be available for other functions
     token_data =json.loads(response.text)
     #print(token_data['access_token'])      # Bearer Token
     return token_data
@@ -58,7 +60,9 @@ def get_usercount_in_realm():
 
 def get_users(start_value_pagination,end_value_pagination):
     """GET /{realm}/users """
+    
     token_data = get_accesstoken()
+    #global json_arr # retrieved User_Array should be available for other functions
 
     url2 = str(target_host)+"/auth/admin/realms/trafineo/users?first="+str(start_value_pagination)+"&max="+str(end_value_pagination)+"" 
     payload2='='
@@ -88,7 +92,7 @@ def get_users(start_value_pagination,end_value_pagination):
 def print_number_of_changed_users(json_arr):
     """ Print the Number of users in the realm selected for change"""
     print("------------------------------------------------------------------------")
-    print ("Number of Users in the realm about to be changed: "+str(len(json_arr))) 
+    print ("Number of Users in the realm about to be changed in this run: "+str(len(json_arr))) 
     print("------------------------------------------------------------------------")
 
 
@@ -101,57 +105,61 @@ def add_attribute_to_users(json_arr):
      url3 = str(target_host)+"/auth/admin/realms/trafineo/users/"+str(x['id'])  # prepare URL for GET and PUT
      
      # -- Debug --
-     #print ("--Debug: User-URL--")
-     #print (url3)
+     print ("--Changing User-ID (User-URL): --")
+     print (url3)
      
      # -- /Debug -- 
 
 
     ## Get existing attributes for each user & add new one  
-# ------------------------------------------------------------------------------------
-        #print (x) # All Values in the dictionary
-         # print(x['attributes'])
+    # ------------------------------------------------------------------------------------
+    #print (x) # All Values in the dictionary
+    #print(x['attributes'])
     if 'attributes' in x:
         x['attributes']['i18n'] = ['en']
         NewAttributes = x['attributes']
         NewAttributes['i18n'] = ['en']           # add attribute "i18n"
     else:
-         x['attributes'] = {}
-         NewAttributes = x['attributes']
-         NewAttributes['i18n'] = ['en']
+        x['attributes'] = {}
+        NewAttributes = x['attributes']
+        NewAttributes['i18n'] = ['en']
         # -- Debug -- 
         # print ("--Debug: Attribute Values--")
         # print (NewAttributes)
-         # -- /Debug -- 
+        # -- /Debug -- 
 
 # ------------------------------------------------------------------------------------
 # write all attributes via PUT 
 # ------------------------------------------------------------------------------------
 
-         payload3 = json.dumps({
-         "attributes": NewAttributes
-         })
-         # -- Debug -- 
-         #print ("--Debug: Payload Content--")
-         #print (payload3)
-         # -- /Debug -- 
+    payload3 = json.dumps({
+    "attributes": NewAttributes
+    })
+    
+    # -- Debug -- 
+    #print ("--Debug: Payload Content--")
+    #print (payload3)
+    # -- /Debug -- 
 
-         headers3 = {
-           'Content-Type': 'application/json',
-           'Authorization': 'Bearer '+token_data['access_token'],
-         }
+    headers3 = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+token_data['access_token'],
+        }
 
-         response3 = requests.request("PUT", url3, headers=headers3, data=payload3, verify=False) # write via PUT !
-         response3_HTTP_REASON = response3.reason
-         response3_HTTP_CODE = response3.status_code
+    response3 = requests.request("PUT", url3, headers=headers3, data=payload3, verify=False) # write via PUT !
+    response3_HTTP_REASON = response3.reason
+    response3_HTTP_CODE = response3.status_code
 
-         ## log feedback into console ...
-         print("    ")
-         print("Adding attribute to User:"+" "+x['username']+" ...")
-         print("Attributes retrieved: "+str(x['attributes']))
-         print("Attributes changed:   "+ str(NewAttributes))
-         print("Response HTTP Code:   " +str(response3_HTTP_CODE)+" "+str(response3_HTTP_REASON))
-         print("------------------------------------------------------------------------")
+    ## log feedback into console ...
+    print("    ")
+    print("Last changed User on this run (Username):"+" "+x['username']+" ...")
+    print("Attributes retrieved: "+str(x['attributes']))
+    print("Attributes changed:   "+ str(NewAttributes))
+    print("Last HTTP Response Code:   " +str(response3_HTTP_CODE)+" "+str(response3_HTTP_REASON))
+    print("------------------------------------------------------------------------")
+    
+    return response3_HTTP_CODE, response3_HTTP_REASON, NewAttributes,  x['username'], x['attributes']
+
 
 
 ## Main ##
@@ -166,5 +174,8 @@ while len(user_array) > 0:
   add_attribute_to_users(user_array)
   start_index = start_index + limit
   user_array = get_users(start_index,limit)
-
+if len(user_array) < 1 :
+  print("Changes complete, please verify !")
+else:
+  print("Changes not complete, please check !")
 
